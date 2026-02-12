@@ -56,7 +56,7 @@ img{
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
-// starta musik (funkar pga YES-klick)
+// starta musik (YES-klick räknas som användarinteraktion)
 document.getElementById("music").play().catch(()=>{});
 
 // konfetti
@@ -66,7 +66,7 @@ confetti({
     origin: { y: 0.6 }
 });
 
-// hjärtan
+// hjärtan som flyger
 function createHeart(){
     const heart = document.createElement("div");
     heart.classList.add("heart");
