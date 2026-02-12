@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yaaay!</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#ffd6e0;
+}
+
+h1{
+    font-size:1.8rem;
+    padding:20px;
+    z-index:2;
+}
+
+img{
+    width:220px;
+    z-index:2;
+}
+
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation: float 4s linear infinite;
+}
+
+@keyframes float{
+    to{ transform: translateY(-110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Yaaay! Jag kände på mig att du skulle svara ja. Jag älskar dig!! ❤️</h1>
+
+<img src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" alt="love">
+
+<audio id="music" loop>
+    <source src="aquaman.mp3" type="audio/mpeg">
+</audio>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+// starta musik (funkar pga YES-klick)
+document.getElementById("music").play().catch(()=>{});
+
+// konfetti
+confetti({
+    particleCount: 200,
+    spread: 120,
+    origin: { y: 0.6 }
+});
+
+// hjärtan
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random()*2) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
