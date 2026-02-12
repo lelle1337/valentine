@@ -52,7 +52,7 @@ button {
     cursor:pointer;
     transition: transform 0.2s ease, background 0.3s ease;
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-    position: relative; /* så NO-knappen kan flytta sig med JS */
+    position: relative; /* för NO-knappen */
 }
 
 #yes{
@@ -77,8 +77,8 @@ button {
 
 <body>
 
-<!-- Ny första bild -->
-<img src="https://i.imgur.com/FFCMOaY.jpg" alt="cute">
+<!-- Första sidan bild -->
+<img src="https://i.imgur.com/XcHVHpT.jpeg" alt="cute">
 
 <h1>Will you be my Valentine? ❤️</h1>
 
@@ -87,9 +87,15 @@ button {
     <button id="no">No 😢</button>
 </div>
 
+<!-- Ljudfil som spelas först när man klickar YES -->
+<audio id="music" loop>
+    <source src="aquaman.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
+const music = document.getElementById("music");
 
 let noScale = 1;
 let yesScale = 1;
@@ -98,11 +104,42 @@ function moveButton(){
     const maxX = window.innerWidth - noBtn.offsetWidth;
     const maxY = window.innerHeight - noBtn.offsetHeight;
 
-    // NO-knappen flyttas relativt sidan
+    // NO-knappen flyttas relativt hela sidan
     noBtn.style.position = "fixed";
     noBtn.style.left = Math.random() * maxX + "px";
     noBtn.style.top = Math.random() * maxY + "px";
 
     // NO krymper
     noScale *= 0.9;
-    noBtn.style.transform = `scale(${no
+    noBtn.style.transform = `scale(${noScale})`;
+
+    // YES växer
+    yesScale *= 1.1;
+    yesBtn.style.transform = `scale(${yesScale})`;
+}
+
+// Desktop hover
+noBtn.addEventListener("mouseenter", moveButton);
+
+// Mobil touch
+noBtn.addEventListener("touchstart", function(e){
+    moveButton();
+    e.preventDefault();
+});
+
+// YES-knappen klick/touch
+yesBtn.addEventListener("click", () => {
+    // Starta ljudet vid första klick
+    music.play().catch(()=>{}); 
+    // Gå vidare till yes.html
+    window.location.href = "yes.html";
+});
+
+yesBtn.addEventListener("touchstart", () => {
+    music.play().catch(()=>{}); 
+    window.location.href = "yes.html";
+});
+</script>
+
+</body>
+</html>
