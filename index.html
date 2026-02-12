@@ -48,8 +48,6 @@ button{
 }
 
 #yes{
-    left:30%;
-    top:60%;
     background: #ff4d6d;
     color:white;
 }
@@ -59,8 +57,6 @@ button{
 }
 
 #no{
-    left:55%;
-    top:60%;
     background: #999;
     color:white;
 }
@@ -68,6 +64,19 @@ button{
 #no:hover{
     background: #aaa;
 }
+
+    .button-container {
+    margin-top: 30px; /* avstånd under bilden */
+    display: flex;
+    gap: 30px; /* avstånd mellan YES och NO */
+    justify-content: center; /* centrerar knapparna horisontellt */
+    position: relative; /* för att NO-knappen fortfarande kan flytta sig */
+}
+
+button {
+    position: relative; /* så vi kan flytta NO-knappen med JS */
+}
+
 </style>
 </head>
 
@@ -78,8 +87,10 @@ button{
 
 <h1>Will you be my Valentine? ❤️</h1>
 
-<button id="yes">YES ❤️</button>
-<button id="no">No 😢</button>
+<div class="button-container">
+    <button id="yes">YES ❤️</button>
+    <button id="no">No 😢</button>
+</div>
 
 <script>
 const noBtn = document.getElementById("no");
@@ -114,4 +125,5 @@ yesBtn.addEventListener("click", () => {
 
 </body>
 </html>
+
 
